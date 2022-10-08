@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import "./App.css";
 import Modal from "./components/Modal";
+import Portal from "./libs/Portal";
 
 function App() {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+
+  const onHideModal = useCallback(() => {
+    setIsOpenModal(false);
+  }, []);
 
   return (
     <>
@@ -14,7 +19,11 @@ function App() {
       </div>
 
       {/* components */}
-      {isOpenModal && <Modal />}
+      {isOpenModal && (
+        <Portal>
+          <Modal onHide={onHideModal} />
+        </Portal>
+      )}
     </>
   );
 }

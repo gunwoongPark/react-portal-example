@@ -1,12 +1,12 @@
 import styles from "./style/ModalStyle.module.css";
 
-const Modal = () => {
+const Modal = (props: { onHide: () => void }) => {
   return (
     <>
       <div className={styles.modal_container}>
-        <div className={styles.modal_body}>HI PORTAL</div>
+        <div className={styles.modal_body}>HELLO PORTAL</div>
       </div>
-      <div className={styles.modal_dim_side} />
+      <div className={styles.modal_dim_side} onClick={() => props.onHide()} />
     </>
   );
 };
