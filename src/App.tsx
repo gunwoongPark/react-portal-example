@@ -1,14 +1,14 @@
-import { useCallback, useState } from "react";
+import { useRef } from "react";
 import "./App.css";
 import Modal from "./components/Modal";
+import useClickOutside from "./hooks/useClickOutside";
 import Portal from "./libs/Portal";
 
 function App() {
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const modalRef = useRef<HTMLDivElement>(null);
 
-  const onHideModal = useCallback(() => {
-    setIsOpenModal(false);
-  }, []);
+  const { isOpen: isOpenModal, setIsOpen: setIsOpenModal } =
+    useClickOutside(modalRef);
 
   return (
     <>
@@ -21,7 +21,7 @@ function App() {
       {/* components */}
       {isOpenModal && (
         <Portal>
-          <Modal onHide={onHideModal} />
+          <Modal ref={modalRef} />
         </Portal>
       )}
     </>
